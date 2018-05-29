@@ -1,5 +1,6 @@
 import heapq as hq
 import pdb
+from collections import deque
 
 class Priority_Queue:
     def __init__(self):
@@ -14,7 +15,7 @@ class Priority_Queue:
         tile_val=s.getstate()
         if tile_val not in self.storage:
             hq.heappush(self.order, (-1*tile_val, self.counter) );    #counter is used for ordering (since it is unique) if tile value is same
-            self.storage[tile_val]=s                               #store state in dictionary
+            self.storage[tile_val]=s                                  #store state in dictionary
         self.counter=self.counter+1    
 
     def dequeue(self):
@@ -22,6 +23,24 @@ class Priority_Queue:
         tv=tv*-1
         return self.storage.pop(tv,None)    
 
+class Queue:
+    def __init__(self):
+        self.order = deque([])  #stores order of elements in Queue (elements stored in FIFO deque)
+        self.storage=dict()     #stores elements in Queue to improve performance of element search
+    
+    def isEmpty(self): 
+        return len(self.order) == 0    
+
+    def enqueue(self,s):
+        tile_val=s.getstate()
+        if tile_val not in self.storage:
+            self.order.appendleft(tile_val)  #add to tail of FIFO deque
+            self.storage[tile_val]=s         #store element in dictionary
+
+    def dequeue(self):
+        #return self.storage[self.order.pop()]
+        return self.storage.pop(self.order.pop(),None)
+        
 class State:
 
     def __init__(self, initstate, in_level,in_parent): # , in_change):
@@ -83,7 +102,7 @@ def greedySearch(init_state, goal_state, ladders_and_snakes):
     #start_time = time.time()
     # pdb.set_trace()
     
-    frontier = Priority_Queue()
+    frontier = Queue() #Priority_Queue()
     frontier.enqueue(init_state)
     
     explored = set() #set is unordered collection of unique elements, enables faster searches
@@ -120,8 +139,8 @@ def quickestWayUp(ladders, snakes):
     
     return greedySearch(State(1,0,None), 100, special_cells)
 
-# ladders=[[32, 62], [42, 68], [12, 98]]
-# snakes=[[95, 13], [97, 25], [93, 37], [79, 27], [75, 19], [49, 47], [67, 17]]
-ladders= [[8, 52], [6, 80], [26, 42], [2, 72]]
-snakes= [[51, 19], [39, 11], [37, 29], [81, 3], [59, 5], [79, 23], [53, 7], [43, 33], [77, 21]]
+ladders=[[32, 62], [42, 68], [12, 98]]
+snakes=[[95, 13], [97, 25], [93, 37], [79, 27], [75, 19], [49, 47], [67, 17]]
+# ladders= [[8, 52], [6, 80], [26, 42], [2, 72]]
+# snakes= [[51, 19], [39, 11], [37, 29], [81, 3], [59, 5], [79, 23], [53, 7], [43, 33], [77, 21]]
 print(quickestWayUp(ladders,snakes))
