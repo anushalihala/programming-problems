@@ -1,3 +1,6 @@
+# NOTE: Greedy search fails to give optimal solution in some case
+# e.g. if going down snake enables taking another ladder
+
 import heapq as hq
 import pdb
 from collections import deque
@@ -139,8 +142,8 @@ def quickestWayUp(ladders, snakes):
     
     return greedySearch(State(1,0,None), 100, special_cells)
 
-ladders=[[32, 62], [42, 68], [12, 98]]
-snakes=[[95, 13], [97, 25], [93, 37], [79, 27], [75, 19], [49, 47], [67, 17]]
-# ladders= [[8, 52], [6, 80], [26, 42], [2, 72]]
-# snakes= [[51, 19], [39, 11], [37, 29], [81, 3], [59, 5], [79, 23], [53, 7], [43, 33], [77, 21]]
+# ladders=[[32, 62], [42, 68], [12, 98]]
+# snakes=[[95, 13], [97, 25], [93, 37], [79, 27], [75, 19], [49, 47], [67, 17]]
+ladders= [[8, 52], [6, 80], [26, 42], [2, 72]]
+snakes= [[51, 19], [39, 11], [37, 29], [81, 3], [59, 5], [79, 23], [53, 7], [43, 33], [77, 21]]
 print(quickestWayUp(ladders,snakes))
