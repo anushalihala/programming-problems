@@ -4,7 +4,6 @@ import random
 import re
 import sys
 
-# Complete the icecreamParlor function below.
 def icecreamParlor(m, arr):
     ans=[]
     for i in range(len(arr)):
