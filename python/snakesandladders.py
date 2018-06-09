@@ -98,14 +98,10 @@ class State:
             curr_state=curr_state.parent
         path.reverse()    
         return path
-        
-        
+
 def greedySearch(init_state, goal_state, ladders_and_snakes):
-    #print "This is astar"    
-    #start_time = time.time()
-    # pdb.set_trace()
     
-    frontier = Queue() #Priority_Queue()
+    frontier = Priority_Queue()
     frontier.enqueue(init_state)
     
     explored = set() #set is unordered collection of unique elements, enables faster searches
@@ -116,8 +112,30 @@ def greedySearch(init_state, goal_state, ladders_and_snakes):
         
         if curr_state.getstate()==goal_state:
 		
-            # runtime=time.time() - start_time
-            # maxramuse=maxspace()
+            print(curr_state.pathtoroot())
+            return curr_state.getlevel()
+            
+        for child in curr_state.createchildren(ladders_and_snakes,goal_state):
+                
+            if child not in explored:
+                #enqueue checks if child already in queue, if not child is added
+                frontier.enqueue(child) 
+                
+    return -1
+    
+def BFS(init_state, goal_state, ladders_and_snakes):
+    
+    frontier = Queue() 
+    frontier.enqueue(init_state)
+    
+    explored = set() #set is unordered collection of unique elements, enables faster searches
+    
+    while not frontier.isEmpty():   
+        curr_state=frontier.dequeue()
+        explored.add(curr_state)
+        
+        if curr_state.getstate()==goal_state:
+		
             print(curr_state.pathtoroot())
             return curr_state.getlevel()
             
@@ -140,8 +158,9 @@ def quickestWayUp(ladders, snakes):
     for item in snakes:
         special_cells[item[0]]=item[1]
     
-    return greedySearch(State(1,0,None), 100, special_cells)
+    return BFS(State(1,0,None), 100, special_cells)
 
+#TESTCASES
 # ladders=[[32, 62], [42, 68], [12, 98]]
 # snakes=[[95, 13], [97, 25], [93, 37], [79, 27], [75, 19], [49, 47], [67, 17]]
 ladders= [[8, 52], [6, 80], [26, 42], [2, 72]]
