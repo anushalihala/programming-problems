@@ -1,4 +1,4 @@
-#CODE FOR PROBLEM:
+#PROBLEM STATEMENT:
 #http://www.pythonchallenge.com/pc/def/map.html
 
 #HELPFUL RESOURCES
