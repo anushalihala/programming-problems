@@ -9,10 +9,11 @@ import string
 def method1(text, shift):
     new_text=''
     for ch in text:
-        if(ord(ch)<ord('a') or ord(ch)>ord('z')):
+        if(ord(ch)<ord('a') or ord(ch)>ord('z')): #or use isalpha function
             new_ch=ch
         else:
-            ch_index = ord(ch)-ord('a')
+            #character index is character value between 0 and 25
+            ch_index = ord(ch)-ord('a')      
             new_index = (ch_index+shift)%26
             new_ch=chr(new_index+ord('a'))
         new_text=new_text+new_ch
