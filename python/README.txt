@@ -21,3 +21,7 @@ Concepts Used; Recursion, Dynamic programming
 Xor Key - 
 Find maximum xor value between given integer and array elements within given range
 Concepts Used; Implemented in 2 ways - i)Using heaps  ii)Using tries
+
+Rotate Matrix -
+Anticlockwise rotation of matrix
+Concepts Used; 2D lists
