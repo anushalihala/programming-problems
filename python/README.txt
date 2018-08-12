@@ -25,3 +25,7 @@ Concepts Used; Implemented in 2 ways - i)Using heaps  ii)Using tries
 Rotate Matrix -
 Anticlockwise rotation of matrix
 Concepts Used; 2D lists
+
+Roman Numerals -
+Calculate the Roman number of a given decimal number
+Concepts Used; Recursion
